@@ -127,6 +127,16 @@
         height: 160%;
       }
 
+      #logo {
+        position: absolute;
+        right: 1em;
+        top: 1em;
+      }
+      #logo img {
+        max-width: 100px;
+        opacity: 0.5;
+        -webkit-filter: grayscale(0.6);
+      }
     </style>
 
     <!-- If the query includes 'print-pdf', use the PDF print sheet -->
@@ -264,6 +274,9 @@ end
     </div>
 
 
+    <div id="logo">
+      <img src="http://gaslight.co/assets/home/logo.png" />
+    </div>
     <script src="lib/js/head.min.js"></script>
     <script src="js/reveal.min.js"></script>
 
