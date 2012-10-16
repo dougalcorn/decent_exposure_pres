@@ -182,7 +182,7 @@ end
   <section>
     <h2>Instance Variables in Views</h2>
     <pre><code>
-      Hi, <%= @employee.name %>
+Hi, <%= @employee.name %>
     </code></pre>
     <blockquote cite="http://www.stephencelis.com/2008/09/06/rails-controllers-views-and-variables.html">
       In object-oriented programming, an object uses instance variables to store private information. If you want to access an object’s instance variables, those variables should only be accessible through instance methods. At least, this is the expectation.
@@ -223,13 +223,13 @@ end
   <section>
     <h2>Trickier Example</h2>
     <pre><code>
-  def employee
-    @employee ||= if params[:id]
-      Employee.find params[:id]
-    else
-      Employee.new params[:employee]
-    end
+def employee
+  @employee ||= if params[:id]
+    Employee.find params[:id]
+  else
+    Employee.new params[:employee]
   end
+end
     </code></pre>      
     <aside class="notes">
       Here we see that the singular instance of employee is either initialized with it's id if it's passed in as a param (as in the show action) or it's newed up with passed in attributes (as in the create attribute).
@@ -241,11 +241,11 @@ end
   <section>
     <h2>Decent Exposure</h2>
     <pre><code>
-      class EmployeesController < ApplicationController
-        expose(:company)
-        expose(:employees) { company.employees.all }
-        expose(:employee)
-      end
+class EmployeesController < ApplicationController
+  expose(:company)
+  expose(:employees) { company.employees.all }
+  expose(:employee)
+end
     </code></pre>
     <aside class="notes">
       Here we're using decent exposure's <code>expose</code> method to create helper methods similar to our hand rolled helpers. Without any arguments, they do a pretty "decent" job of guessing what it should do to load the resource. With an optional block you can specify how the resource should be defined.
