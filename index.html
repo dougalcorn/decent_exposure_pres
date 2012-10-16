@@ -12,13 +12,122 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     
-    <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-    
+    <script type="text/javascript" src="//use.typekit.net/ono5mit.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
     <link rel="stylesheet" href="css/reveal.css">
     <link rel="stylesheet" href="css/theme/default.css" id="theme">
+    <!-- <link rel="stylesheet" href="http://gaslight.dev/assets/application.css"> -->
 
     <!-- For syntax highlighting -->
     <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <style type="text/css">
+      body {
+        font-family: 'ff-din-web', Times, 'Times New Roman', serif;
+        font-size: 36px;
+        font-weight: 200;
+        letter-spacing: -0.02em;
+        background: url(http://gaslight.dev/assets/home/background.jpg);
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+      }
+      .reveal .slides {
+        margin-top: -340px;
+      }
+
+      .reveal code {
+        padding-left: .5em;
+      }
+
+      .reveal .slides section {
+        background-color: rgba(255, 255, 255, 0.5);
+        padding: 2em;
+        box-sizing: border-box;
+        box-shadow: 0px 10px 30px #bbb;
+      }
+
+      .reveal h1, 
+      .reveal h2, 
+      .reveal h3, 
+      .reveal h4, 
+      .reveal h5, 
+      .reveal h6,
+      body {
+        color: rgba(30, 30, 30, 0.85);
+        font-family: 'ff-din-web', 'League Gothic', Impact, sans-serif;
+      }
+
+      .reveal h1, .reveal h2 {
+        font-family: 'League Gothic', Impact, sans-serif;
+        text-transform: uppercase;
+        text-shadow: none;
+      }
+      .reveal h3, 
+      .reveal h4, 
+      .reveal h5, 
+      .reveal h6 {
+        text-transform: none;
+        letter-spacing: -2px;
+        line-height: 1.1em;
+      }
+      .reveal h3 {
+        color: rgba(55, 55, 55, 0.9);
+        font-size: 140%;
+      }
+      .reveal h4 {
+        color: rgba(55, 55, 55, 0.9);
+        font-size: 80%;
+      }
+
+      #bars {
+        width: 100%;
+        position: absolute;
+        top: 0;
+        height: 15px;
+        overflow: visible;
+        margin: 0;
+        padding: 0;
+      }
+      /* line 33, ../../app/assets/stylesheets/application.css.scss */
+      #bars li {
+        width: 33.333%;
+        float: left;
+        height: 100%;
+        list-style: none;
+        -webkit-transition-property: height;
+        -moz-transition-property: height;
+        -o-transition-property: height;
+        transition-property: height;
+        -webkit-transition-duration: 0.25s;
+        -moz-transition-duration: 0.25s;
+        -o-transition-duration: 0.25s;
+        transition-duration: 0.25s;
+        -webkit-transition-timing-function: ease-in-out;
+        -moz-transition-timing-function: ease-in-out;
+        -o-transition-timing-function: ease-in-out;
+        transition-timing-function: ease-in-out;
+      }
+      /* line 38, ../../app/assets/stylesheets/application.css.scss */
+      #bars li.brand1 {
+        background: #d63f31;
+      }
+      /* line 39, ../../app/assets/stylesheets/application.css.scss */
+      #bars li.brand2 {
+        background: #60b6e4;
+      }
+      /* line 40, ../../app/assets/stylesheets/application.css.scss */
+      #bars li.brand3 {
+        background: #ebd018;
+      }
+      /* line 41, ../../app/assets/stylesheets/application.css.scss */
+      #bars li.active {
+        height: 160%;
+      }
+
+    </style>
 
     <!-- If the query includes 'print-pdf', use the PDF print sheet -->
     <script>
@@ -31,6 +140,11 @@
   </head>
   
   <body>
+    <ul id='bars'>
+      <li class='brand1'></li>
+      <li class='brand2'></li>
+      <li class='brand3'></li>
+    </ul>
     
     <div class="reveal">
 
