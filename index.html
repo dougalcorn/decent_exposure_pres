@@ -12,13 +12,132 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     
-    <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-    
+    <script type="text/javascript" src="//use.typekit.net/ono5mit.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
     <link rel="stylesheet" href="css/reveal.css">
     <link rel="stylesheet" href="css/theme/default.css" id="theme">
+    <!-- <link rel="stylesheet" href="http://gaslight.dev/assets/application.css"> -->
 
     <!-- For syntax highlighting -->
     <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <style type="text/css">
+      body {
+        font-family: 'ff-din-web', Times, 'Times New Roman', serif;
+        font-size: 36px;
+        font-weight: 200;
+        letter-spacing: -0.02em;
+        background: url(http://gaslight.co/assets/home/background.jpg);
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+      }
+      .reveal .slides {
+        margin-top: -340px;
+      }
+
+      .reveal code {
+        padding-left: .5em;
+      }
+
+      .reveal .slides section {
+        background-color: rgba(255, 255, 255, 0.5);
+        padding: 2em;
+        box-sizing: border-box;
+        box-shadow: 0px 10px 30px #bbb;
+      }
+
+      .reveal h1, 
+      .reveal h2, 
+      .reveal h3, 
+      .reveal h4, 
+      .reveal h5, 
+      .reveal h6,
+      body {
+        color: rgba(30, 30, 30, 0.85);
+        font-family: 'ff-din-web', 'League Gothic', Impact, sans-serif;
+      }
+
+      .reveal h1, .reveal h2 {
+        font-family: 'League Gothic', Impact, sans-serif;
+        text-transform: uppercase;
+        text-shadow: none;
+      }
+      .reveal h3, 
+      .reveal h4, 
+      .reveal h5, 
+      .reveal h6 {
+        text-transform: none;
+        letter-spacing: -2px;
+        line-height: 1.1em;
+      }
+      .reveal h3 {
+        color: rgba(55, 55, 55, 0.9);
+        font-size: 140%;
+      }
+      .reveal h4 {
+        color: rgba(55, 55, 55, 0.9);
+        font-size: 80%;
+      }
+
+      #bars {
+        width: 100%;
+        position: absolute;
+        top: 0;
+        height: 15px;
+        overflow: visible;
+        margin: 0;
+        padding: 0;
+      }
+      /* line 33, ../../app/assets/stylesheets/application.css.scss */
+      #bars li {
+        width: 33.333%;
+        float: left;
+        height: 100%;
+        list-style: none;
+        -webkit-transition-property: height;
+        -moz-transition-property: height;
+        -o-transition-property: height;
+        transition-property: height;
+        -webkit-transition-duration: 0.25s;
+        -moz-transition-duration: 0.25s;
+        -o-transition-duration: 0.25s;
+        transition-duration: 0.25s;
+        -webkit-transition-timing-function: ease-in-out;
+        -moz-transition-timing-function: ease-in-out;
+        -o-transition-timing-function: ease-in-out;
+        transition-timing-function: ease-in-out;
+      }
+      /* line 38, ../../app/assets/stylesheets/application.css.scss */
+      #bars li.brand1 {
+        background: #d63f31;
+      }
+      /* line 39, ../../app/assets/stylesheets/application.css.scss */
+      #bars li.brand2 {
+        background: #60b6e4;
+      }
+      /* line 40, ../../app/assets/stylesheets/application.css.scss */
+      #bars li.brand3 {
+        background: #ebd018;
+      }
+      /* line 41, ../../app/assets/stylesheets/application.css.scss */
+      #bars li.active {
+        height: 160%;
+      }
+
+      #logo {
+        position: absolute;
+        right: 1em;
+        top: 1em;
+      }
+      #logo img {
+        max-width: 100px;
+        opacity: 0.5;
+        -webkit-filter: grayscale(0.6);
+      }
+    </style>
 
     <!-- If the query includes 'print-pdf', use the PDF print sheet -->
     <script>
@@ -31,6 +150,11 @@
   </head>
   
   <body>
+    <ul id='bars'>
+      <li class='brand1'></li>
+      <li class='brand2'></li>
+      <li class='brand3'></li>
+    </ul>
     
     <div class="reveal">
 
@@ -68,7 +192,7 @@ end
   <section>
     <h2>Instance Variables in Views</h2>
     <pre><code>
-      Hi, <%= @employee.name %>
+Hi, <%= @employee.name %>
     </code></pre>
     <blockquote cite="http://www.stephencelis.com/2008/09/06/rails-controllers-views-and-variables.html">
       In object-oriented programming, an object uses instance variables to store private information. If you want to access an object’s instance variables, those variables should only be accessible through instance methods. At least, this is the expectation.
@@ -109,13 +233,13 @@ end
   <section>
     <h2>Trickier Example</h2>
     <pre><code>
-  def employee
-    @employee ||= if params[:id]
-      Employee.find params[:id]
-    else
-      Employee.new params[:employee]
-    end
+def employee
+  @employee ||= if params[:id]
+    Employee.find params[:id]
+  else
+    Employee.new params[:employee]
   end
+end
     </code></pre>      
     <aside class="notes">
       Here we see that the singular instance of employee is either initialized with it's id if it's passed in as a param (as in the show action) or it's newed up with passed in attributes (as in the create attribute).
@@ -127,11 +251,11 @@ end
   <section>
     <h2>Decent Exposure</h2>
     <pre><code>
-      class EmployeesController < ApplicationController
-        expose(:company)
-        expose(:employees) { company.employees.all }
-        expose(:employee)
-      end
+class EmployeesController < ApplicationController
+  expose(:company)
+  expose(:employees) { company.employees.all }
+  expose(:employee)
+end
     </code></pre>
     <aside class="notes">
       Here we're using decent exposure's <code>expose</code> method to create helper methods similar to our hand rolled helpers. Without any arguments, they do a pretty "decent" job of guessing what it should do to load the resource. With an optional block you can specify how the resource should be defined.
@@ -140,8 +264,8 @@ end
   <section>
     <h2>More Info</h2>
     <ul>
-      <li>These slides are at<a href="http://dougalcorn.github.com/decent_exposure_pres">http://dougalcorn.github.com/decent_exposure_pres</a></li>
-      <li>Decent Exposure officially lives at <a href="https://github.com/voxdolo/decent_exposure">https://github.com/voxdolo/decent_exposure</a></li>
+      <li>These slides are at <a href="http://dougalcorn.github.com/decent_exposure_pres">dougalcorn.github.com/decent_exposure_pres</a></li>
+      <li>Decent Exposure officially lives at <a href="https://github.com/voxdolo/decent_exposure">github.com/voxdolo/decent_exposure</a></li>
       <li>A <a href="http://asciicasts.com/episodes/259-decent-exposure">Rails Cast on Decent Exposure</a></li>
     </ul>
   </section>
@@ -150,6 +274,9 @@ end
     </div>
 
 
+    <div id="logo">
+      <img src="http://gaslight.co/assets/home/logo.png" />
+    </div>
     <script src="lib/js/head.min.js"></script>
     <script src="js/reveal.min.js"></script>
 
